@@ -9,7 +9,7 @@ const std::vector<std::string> LoadingState::infoTexts
 {
    "Made using the CX library!"s,
    "Using CX "s CX_VERSION_STRING "!"s,
-   "Made by Chalcinxx."s,
+   "Made by Daniel Vishnevsky."s,
    "Pong."s,
    "Pong. Or is it?"s,
    "Hard Bot just has more optimized code, he isn't cheating."s,
@@ -33,8 +33,8 @@ LoadingState::LoadingState(window_t& window,
 {
    // Create loading bar
    loadingScreenBar.create(cx::Vec2f(600.f, 35.f), event->get_center(), 0.f, cx::Color(255), cx::Color(0));
-   loadingScreenBar.set_bg_outline_color(cx::Color(255));
-   loadingScreenBar.set_bg_outline_thickness(2.5f);
+   loadingScreenBar.get_background().setOutlineColor(cx::Color(255));
+   loadingScreenBar.get_background().setOutlineThickness(2.5f);
 
    // Create loading text
    loadingText.create("Loading Textures..."s, *asset->load_font("fonts/pixel.ttf"s), loadingScreenBar.get_center() - cx::Vec2f(0.f, 75.f), 48u);
@@ -48,14 +48,10 @@ LoadingState::LoadingState(window_t& window,
    screenTint.create(event->get_size(), event->get_center(), cx::Color(0, 0));
 
    // Make sure all of the directories exist
-   if (!asset->dir_exists("images/"s))
-      throw std::runtime_error("Directory 'assets/images' does not exist, but is vital."s);
-   if (!asset->dir_exists("sounds/"s))
-      throw std::runtime_error("Directory 'assets/sounds' does not exist, but is vital."s);
-   if (!asset->dir_exists("music/"s))
-      throw std::runtime_error("Directory 'assets/music' does not exist, but is vital."s);
-   if (!asset->dir_exists("fonts/"s))
-      throw std::runtime_error("Directory 'assets/fonts' does not exist, but is vital."s);
+   std::filesystem::create_directories("assets/images/");
+   std::filesystem::create_directories("assets/sounds/");
+   std::filesystem::create_directories("assets/music/");
+   std::filesystem::create_directories("assets/fonts/");
 
    // Load textures first
    asset->load_texture_dir_async([this](bool success)

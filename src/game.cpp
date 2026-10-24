@@ -38,7 +38,7 @@ void Game::createStyles()
    audio->save_sound("start"s, "horn"s, 1, .75f, 1.25f);
 
    // Create styles
-   cx::ButtonStyle::style1() = cx::ButtonStyle{cx::Vec2f(200.f, 50.f), asset->get_font("pixel"s), 16, cx::Color(200), cx::Color(255), cx::Color(0), cx::Color(0), 0.f, 1.5f, asset->get_texture("button8"s)};
+   cx::ButtonStyle::style1() = cx::ButtonStyle{cx::Vec2f(200.f, 50.f), asset->get_font("pixel"s), 16, cx::Color(200), cx::Color(255), cx::Color(0), 1.5f, asset->get_texture("button8"s)};
    cx::Functions::style1() = {std::make_shared<std::function<void(cx::UIElement&)>>([this](cx::UIElement& e)
    {
       if (e.is_mouse_down() && !e.is_mouse_up())

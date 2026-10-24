@@ -1,0 +1,6 @@
+/.vs
+/.vscode
+/.cache
+/.clangd
+/build
+/pong
